@@ -10,8 +10,9 @@ def index(request):
     contents = {}
     if request.method == 'POST':
         if request.FILES.get('ali-img', None) != None:
-            for img in Img.objects.filter(name='alipay'):
-                img.delete()
+            if Img.objects.filter(name='alipay') != None:
+                for img in Img.objects.filter(name='alipay'):
+                    img.delete()
 
             nAli_img = Img(
                 img=request.FILES.get('ali-img', None),
@@ -23,8 +24,9 @@ def index(request):
         else:
             contents['alipay'] = None
         if request.FILES.get('wx-img', None) != None:
-            for img in Img.objects.filter(name='wechat'):
-                img.delete()
+            if Img.objects.filter(name='wechat') != None:
+                for img in Img.objects.filter(name='wechat'):
+                    img.delete()
             nWx_img = Img(
                 img=request.FILES.get('wx-img', None),
                 name="wechat"
