@@ -14,12 +14,12 @@
     </form>
     <label>支付宝</label>
     {% if alipay != None %}
-        <img src="{{ alipay.img.url }}" width="100px" height="100px">
+        <label>{{ alipay }}</label>
     {% endif %}
 
     <label>微信</label>
     {% if wechat != None %}
-        <img src="{{ wechat.img.url }}" width="100px" height="100px">
+        <label>{{ wechat }}</label>
     {% endif %}
 
 </body>
