@@ -83,7 +83,7 @@ def index(request):
         file_path = '/media/img/qrcode.png'
         return render(request, 'hello/index.html', {'url': file_path})
     else:
-        data = os.path.dirname(os.path.dirname(__file__)) + 'https://heyfox.herokuapp.com/pay?ali=' + 'alipayaaaa' + '&wx=' + 'dafadfafa'
+        data = 'https://heyfox.herokuapp.com/pay?ali=' + 'alipayaaaa' + '&wx=' + 'dafadfafa'
         qr.add_data(data)
         qr.make(fit=True)
         img = qr.make_image()
