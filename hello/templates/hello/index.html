@@ -1,16 +1,21 @@
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'hello/styles.css' %}" />
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title></title>
+    <meta http-equiv="Content-Type" content="text/html;charset=gb2312" />
+    <title>一码付</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
 </head>
 <body>
     <label>niub你好水99999999阿哥</label>
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        <input type="file" name="ali-img">
-        <input type="file" name="wx-img">
-        <button type="submit">上传</button>
+        <div>
+            <input type="file" name="ali-img">
+            <input type="file" name="wx-img">
+            <button type="submit">上传</button>
+        </div>
     </form>
     <label>支付宝</label>
     {% if alipay != None %}

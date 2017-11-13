@@ -62,8 +62,6 @@ def index(request):
         contents['alipay'] = None
         contents['wechat'] = None
     print(contents)
-    # print(os.path.dirname(os.path.dirname(__file__)) + '/media/img')
-
 
     return render(request, 'hello/index.html', contents)
 
@@ -83,15 +81,5 @@ def scanQrCode(path):
         print('二维码识别失败')
         return None
 
-def uploadImg(reqest):
-    print("ssssss")
-    return HttpResponse('hddd')
-    # if request.method == 'POST':
-    #     WxImg.objects.all().delete()
-    #     new_img = WxImg(
-    #         img = request.FILES.get('img'),
-    #         name = request.FILES.get('img').name
-    #     )
-    #     new_img.save()
-    #     print("上传成功")
-    # return render(request, 'hello/upload.html')
+
+# zbarlight==1.2
