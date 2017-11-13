@@ -83,7 +83,7 @@ def index(request):
         file_path = '/media/img/qrcode.png'
         return render(request, 'hello/index.html', {'url': file_path})
     else:
-        data = 'https://heyfox.herokuapp.com/pay?ali=' + 'alipayaaaa' + '&wx=' + 'dafadfafa'
+        data = 'https://heyfox.herokuapp.com/pay?ali=' + 'FKX05639AEMUOSN0TE016F' + '&wx=' + 'f2f0JV5T664Amfb_JDHLXtMBTrL2_8PvU68O'
         qr.add_data(data)
         qr.make(fit=True)
         img = qr.make_image()
@@ -107,7 +107,7 @@ def pay(request):
     # MicroMessenger    Alipay
     if str(agent).find('MicroMessenger') != -1:
         print("微信浏览器", wx)
-        return HttpResponse('微信扫码', wx)
+        return HttpResponse('微信扫码' + wx)
     elif str(agent).find('Alipay') != -1:
         print('支付宝浏览器', ali)
         return HttpResponseRedirect(ali)
