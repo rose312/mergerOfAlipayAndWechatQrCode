@@ -8,25 +8,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
 </head>
 <body>
-    <p>上传收款码</p>
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        <div>
-            支付宝：<input type="file" name="ali-img">
-        </div>
-        <div>
-            微   信：<input type="file" name="wx-img">
-        </div>
-        <div>
-
-            <button type="submit">合并</button>
-        </div>
-    </form>
     {% if url %}
-        <label>{{ url }}</label>
+        <label>长按识别二维码进行支付</label>
         <img src="{{ url }}" height="300" width="300">
     {% endif %}
-
 
 </body>
 </html>

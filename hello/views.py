@@ -107,7 +107,18 @@ def pay(request):
     # MicroMessenger    Alipay
     if str(agent).find('MicroMessenger') != -1:
         print("微信浏览器", wx)
-        return HttpResponse('微信扫码' + wx)
+        qr = qrcode.QRCode(
+            version=1,
+            error_correction=qrcode.constants.ERROR_CORRECT_L,
+            box_size=10,
+            border=4,
+        )
+        qr.add_data(wx)
+        qr.make(fit=True)
+        img = qr.make_image()
+        img.save("media/img/" + request.GET.get('wx', None) + ".png")
+        file_path = '/media/img/wxcode.png'
+        return render(request, 'hello/wxcode.html', {'url': file_path})
     elif str(agent).find('Alipay') != -1:
         print('支付宝浏览器', ali)
         return HttpResponseRedirect(ali)
