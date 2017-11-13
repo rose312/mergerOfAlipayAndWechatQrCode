@@ -75,18 +75,30 @@ def index(request):
             box_size=10,
             border=4,
         )
-        qr.add_data(contents['alipay'] + '==' + contents['wechat'])
+        data = os.path.dirname(os.path.dirname(__file__)) + '/pay?ali=' + contents['alipay'] + '&wx=' + contents['wechat']
+        qr.add_data(data)
         qr.make(fit=True)
         img = qr.make_image()
         img.save("media/img/qrcode.png")
         file_path = '/media/img/qrcode.png'
         return render(request, 'hello/index.html', {'url': file_path})
     else:
-        return render(request, 'hello/index.html', {'url': None})
+        data = os.path.dirname(os.path.dirname(__file__)) + '/pay?ali=' + 'alipayaaaa' + '&wx=' + 'dafadfafa'
+        return render(request, 'hello/index.html', {'url': data})
 
 def pay(request):
     agent = request.META.get('HTTP_USER_AGENT', None)
     print(agent)
+    ali = request.GET.get('ali', None)
+    wx = request.GET.get('wx', None)
+    if ali == None or wx == None:
+        return HttpResponse('二维码信息错误')
+
+    ali = 'HTTPS://QR.ALIPAY.COM/' + ali
+    wx = 'wxp://' + wx
+
+    print(ali, wx)
+
     # MicroMessenger    Alipay
     if str(agent).find('MicroMessenger') != -1:
         print("微信浏览器")
