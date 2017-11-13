@@ -13,5 +13,5 @@ import hello.views
 # url(r'^blog/', include('blog.urls')),
 
 urlpatterns = [
-    url(r'^$', include('hello.urls', namespace='hello')),
+    url(r'^', include('hello.urls', namespace='hello')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

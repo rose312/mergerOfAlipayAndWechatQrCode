@@ -4,16 +4,21 @@ from django.http import HttpResponse
 from .models import *
 import os
 
-import pytesseract
 from PIL import Image
 import qrcode
-import zbarlight
+# import zbarlight
 
 # Create your views here.
 def index(request):
     contents = {}
+
     if request.method == 'POST':
-        if request.FILES.get('ali-img', None) != None:
+        ali = request.FILES.get('ali-img', None)
+        wx = request.FILES.get('wx-img', None)
+        if ali == None or wx == None:
+            return HttpResponse("请上传微信和支付宝收款二维码")
+
+        if ali != None:
             if Img.objects.filter(name='alipay') != None:
                 for img in Img.objects.filter(name='alipay'):
                     img.delete()
@@ -36,7 +41,7 @@ def index(request):
             os.remove(file_path + nAli_img.img.name)
         else:
             contents['alipay'] = None
-        if request.FILES.get('wx-img', None) != None:
+        if wx != None:
             if Img.objects.filter(name='wechat') != None:
                 for img in Img.objects.filter(name='wechat'):
                     img.delete()
@@ -63,23 +68,49 @@ def index(request):
         contents['wechat'] = None
     print(contents)
 
-    return render(request, 'hello/index.html', contents)
+    if contents['alipay'] != None and contents['wechat'] != None:
+        qr = qrcode.QRCode(
+            version=1,
+            error_correction=qrcode.constants.ERROR_CORRECT_L,
+            box_size=10,
+            border=4,
+        )
+        qr.add_data(contents['alipay'] + '==' + contents['wechat'])
+        qr.make(fit=True)
+        img = qr.make_image()
+        img.save("media/img/qrcode.png")
+        file_path = '/media/img/qrcode.png'
+        return render(request, 'hello/index.html', {'url': file_path})
+    else:
+        return render(request, 'hello/index.html', {'url': None})
+
+def pay(request):
+    agent = request.META.get('HTTP_USER_AGENT', None)
+    print(agent)
+    # MicroMessenger    Alipay
+    if str(agent).find('MicroMessenger') != -1:
+        print("微信浏览器")
+        return HttpResponse('微信扫码')
+    elif str(agent).find('Alipay') != -1:
+        print('支付宝浏览器')
+        return HttpResponse('支付宝扫码')
+    else:
+        return HttpResponse('请使用微信或者支付宝扫码')
+
 
 # 二维码识别
 def scanQrCode(path):
-    with open(path, 'rb') as image_file:
-        image = Image.open(image_file)
-        image.load()
-    # wxp://f2f0JV5T664Amfb_JDHLXtMBTrL2_8PvU68O
-    # HTTPS://QR.ALIPAY.COM/FKX05639AEMUOSN0TE016F
-    codes = zbarlight.scan_codes('qrcode', image)
-    if codes != None:
-        code = str(codes[0]).lstrip("b'").rstrip("'")
-        print('二维码识别结果：' + code)
-        return code
-    else:
-        print('二维码识别失败')
-        return None
-
-
-# zbarlight==1.2
+    # with open(path, 'rb') as image_file:
+    #     image = Image.open(image_file)
+    #     image.load()
+    # # wxp://f2f0JV5T664Amfb_JDHLXtMBTrL2_8PvU68O
+    # # HTTPS://QR.ALIPAY.COM/FKX05639AEMUOSN0TE016F
+    # codes = zbarlight.scan_codes('qrcode', image)
+    # if codes != None:
+    #     code = str(codes[0]).lstrip("b'").rstrip("'")
+    #     print('二维码识别结果：' + code)
+    #     return code
+    # else:
+    #     print('二维码识别失败')
+    #     return None
+    return None
