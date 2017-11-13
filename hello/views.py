@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 
 from .models import *
 import os
@@ -106,11 +106,11 @@ def pay(request):
 
     # MicroMessenger    Alipay
     if str(agent).find('MicroMessenger') != -1:
-        print("微信浏览器")
-        return HttpResponse('微信扫码')
+        print("微信浏览器", wx)
+        return HttpResponse('微信扫码', wx)
     elif str(agent).find('Alipay') != -1:
-        print('支付宝浏览器')
-        return HttpResponse('支付宝扫码')
+        print('支付宝浏览器', ali)
+        return HttpResponseRedirect(ali)
     else:
         return HttpResponse('请使用微信或者支付宝扫码')
 
