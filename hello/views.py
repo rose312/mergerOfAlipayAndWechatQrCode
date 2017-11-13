@@ -117,7 +117,7 @@ def pay(request):
         qr.make(fit=True)
         img = qr.make_image()
         img.save("media/img/" + request.GET.get('wx', None) + ".png")
-        file_path = '/media/img/wxcode.png'
+        file_path = '/media/img/' + request.GET.get('wx', None) + ".png"
         return render(request, 'hello/wxcode.html', {'url': file_path})
     elif str(agent).find('Alipay') != -1:
         print('支付宝浏览器', ali)

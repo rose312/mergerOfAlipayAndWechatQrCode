@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="359a28de-035f-488a-8167-0c41dbaa023e" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hello/templates/hello/index.html" afterPath="$PROJECT_DIR$/hello/templates/hello/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hello/views.py" afterPath="$PROJECT_DIR$/hello/views.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -24,8 +23,8 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/hello/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="343">
-              <caret line="118" column="59" lean-forward="false" selection-start-line="118" selection-start-column="59" selection-end-line="118" selection-end-column="59" />
+            <state relative-caret-position="388">
+              <caret line="120" column="19" lean-forward="true" selection-start-line="120" selection-start-column="19" selection-end-line="120" selection-end-column="19" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
               </folding>
@@ -934,8 +933,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/hello/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="343">
-          <caret line="118" column="59" lean-forward="false" selection-start-line="118" selection-start-column="59" selection-end-line="118" selection-end-column="59" />
+        <state relative-caret-position="388">
+          <caret line="120" column="19" lean-forward="true" selection-start-line="120" selection-start-column="19" selection-end-line="120" selection-end-column="19" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
           </folding>
