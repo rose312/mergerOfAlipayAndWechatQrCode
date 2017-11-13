@@ -68,14 +68,14 @@ def index(request):
         contents['wechat'] = None
     print(contents)
 
+    qr = qrcode.QRCode(
+        version=1,
+        error_correction=qrcode.constants.ERROR_CORRECT_L,
+        box_size=10,
+        border=4,
+    )
     if contents['alipay'] != None and contents['wechat'] != None:
-        qr = qrcode.QRCode(
-            version=1,
-            error_correction=qrcode.constants.ERROR_CORRECT_L,
-            box_size=10,
-            border=4,
-        )
-        data = os.path.dirname(os.path.dirname(__file__)) + '/pay?ali=' + contents['alipay'] + '&wx=' + contents['wechat']
+        data = 'https://heyfox.herokuapp.com/pay?ali=' + contents['alipay'] + '&wx=' + contents['wechat']
         qr.add_data(data)
         qr.make(fit=True)
         img = qr.make_image()
@@ -83,8 +83,13 @@ def index(request):
         file_path = '/media/img/qrcode.png'
         return render(request, 'hello/index.html', {'url': file_path})
     else:
-        data = os.path.dirname(os.path.dirname(__file__)) + '/pay?ali=' + 'alipayaaaa' + '&wx=' + 'dafadfafa'
-        return render(request, 'hello/index.html', {'url': data})
+        data = os.path.dirname(os.path.dirname(__file__)) + 'https://heyfox.herokuapp.com/pay?ali=' + 'alipayaaaa' + '&wx=' + 'dafadfafa'
+        qr.add_data(data)
+        qr.make(fit=True)
+        img = qr.make_image()
+        img.save("media/img/qrcode.png")
+        file_path = '/media/img/qrcode.png'
+        return render(request, 'hello/index.html', {'url': file_path})
 
 def pay(request):
     agent = request.META.get('HTTP_USER_AGENT', None)
