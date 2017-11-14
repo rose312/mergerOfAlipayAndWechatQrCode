@@ -8,10 +8,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
 </head>
 <body>
-    {% if url %}
-        <label>长按识别二维码进行支付</label>
-        <img src="{{ url }}" height="300" width="300">
-    {% endif %}
+    <div class="qr-container">
+        {% if url %}
+            <img src="{{ url }}" height="300" width="300">
+        {% endif %}
+        <label class="info">{{ info }}</label>
+    </div>
+
 
 </body>
 </html>

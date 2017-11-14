@@ -17,7 +17,8 @@ def index(request):
         ali = request.FILES.get('ali-img', None)
         wx = request.FILES.get('wx-img', None)
         if ali == None or wx == None:
-            return HttpResponse("请上传微信和支付宝收款二维码")
+            return render(request, 'hello/wxcode.html', {'url': None,
+                                                         'info': "请先上传微信和支付宝的收款二维码"})
 
         if ali != None:
             if Img.objects.filter(name='alipay') != None:
@@ -39,6 +40,13 @@ def index(request):
                 else:
                     print('不是支付宝收款码')
                     contents['alipay'] = None
+                    return render(request, 'hello/wxcode.html', {'url': None,
+                                                                 'info': "支付宝收款二维码错误"})
+            else:
+                print('不是支付宝收款码')
+                contents['alipay'] = None
+                return render(request, 'hello/wxcode.html', {'url': None,
+                                                             'info': "支付宝收款二维码错误"})
             os.remove(file_path + nAli_img.img.name)
         else:
             contents['alipay'] = None
@@ -61,6 +69,13 @@ def index(request):
                 else:
                     print('不是微信收款码')
                     contents['wechat'] = None
+                    return render(request, 'hello/wxcode.html', {'url': None,
+                                                                 'info': "微信收款二维码错误"})
+            else:
+                print('不是微信收款码')
+                contents['wechat'] = None
+                return render(request, 'hello/wxcode.html', {'url': None,
+                                                             'info': "微信收款二维码错误"})
             os.remove(file_path + nWx_img.img.name)
         else:
             contents['wechat'] = None
@@ -82,8 +97,8 @@ def index(request):
         img = qr.make_image()
         img.save("media/img/qrcode.png")
         file_path = '/media/img/qrcode.png'
-        # return render(request, 'hello/index.html', {'url': file_path})
-        return HttpResponseRedirect('/pay?ali=' + contents['alipay'] + '&wx=' + contents['wechat'])
+        return render(request, 'hello/wxcode.html', {'url': file_path,
+                                                     'info': "支持微信和支付宝收款"})
     else:
         return render(request, 'hello/index.html', {'url': None})
 
@@ -93,7 +108,8 @@ def pay(request):
     ali = request.GET.get('ali', None)
     wx = request.GET.get('wx', None)
     if ali == None or wx == None:
-        return HttpResponse('二维码信息错误')
+        return render(request, 'hello/wxcode.html', {'url': None,
+                                                     'info': "请使用微信、支付宝进行扫码支付"})
 
     ali = 'HTTPS://QR.ALIPAY.COM/' + ali
     wx = 'wxp://' + wx
@@ -114,24 +130,14 @@ def pay(request):
         img = qr.make_image()
         img.save("media/img/" + request.GET.get('wx', None) + ".png")
         file_path = '/media/img/' + request.GET.get('wx', None) + ".png"
-        return render(request, 'hello/wxcode.html', {'url': file_path})
+        return render(request, 'hello/wxcode.html', {'url': file_path,
+                                                     'info': "长按识别上面的二维码进行支付"})
     elif str(agent).find('Alipay') != -1:
         print('支付宝浏览器', ali)
         return HttpResponseRedirect(ali)
     else:
-        qr = qrcode.QRCode(
-            version=1,
-            error_correction=qrcode.constants.ERROR_CORRECT_L,
-            box_size=10,
-            border=4,
-        )
-        qr.add_data(wx)
-        qr.make(fit=True)
-        img = qr.make_image()
-        img.save("media/img/" + request.GET.get('wx', None) + ".png")
-        file_path = '/media/img/' + request.GET.get('wx', None) + ".png"
-        return render(request, 'hello/wxcode.html', {'url': file_path})
-        # return HttpResponse('请使用微信或者支付宝扫码')
+        return render(request, 'hello/wxcode.html', {'url': None,
+                                                     'info': "请使用微信、支付宝进行扫码支付"})
 
 
 # 二维码识别
@@ -150,3 +156,6 @@ def scanQrCode(path):
     #     print('二维码识别失败')
     #     return None
     return None
+
+
+#zbarlight==1.2
