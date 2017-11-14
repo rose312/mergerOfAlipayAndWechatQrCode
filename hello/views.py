@@ -109,7 +109,7 @@ def pay(request):
     wx = request.GET.get('wx', None)
     if ali == None or wx == None:
         return render(request, 'hello/wxcode.html', {'url': None,
-                                                     'info': "请使用微信、支付宝进行扫码支付"})
+                                                     'info': "未知二维码，请重新合成收款二维码"})
 
     ali = 'HTTPS://QR.ALIPAY.COM/' + ali
     wx = 'wxp://' + wx
