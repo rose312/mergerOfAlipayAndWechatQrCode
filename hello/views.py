@@ -6,7 +6,8 @@ import os
 
 from PIL import Image
 import qrcode
-import zbarlight
+# import zbarlight
+
 
 # Create your views here.
 def index(request):
@@ -81,7 +82,8 @@ def index(request):
         img = qr.make_image()
         img.save("media/img/qrcode.png")
         file_path = '/media/img/qrcode.png'
-        return render(request, 'hello/index.html', {'url': file_path})
+        # return render(request, 'hello/index.html', {'url': file_path})
+        return HttpResponseRedirect('/pay?ali=' + contents['alipay'] + '&wx=' + contents['wechat'])
     else:
         return render(request, 'hello/index.html', {'url': None})
 
@@ -117,22 +119,34 @@ def pay(request):
         print('支付宝浏览器', ali)
         return HttpResponseRedirect(ali)
     else:
-        return HttpResponse('请使用微信或者支付宝扫码')
+        qr = qrcode.QRCode(
+            version=1,
+            error_correction=qrcode.constants.ERROR_CORRECT_L,
+            box_size=10,
+            border=4,
+        )
+        qr.add_data(wx)
+        qr.make(fit=True)
+        img = qr.make_image()
+        img.save("media/img/" + request.GET.get('wx', None) + ".png")
+        file_path = '/media/img/' + request.GET.get('wx', None) + ".png"
+        return render(request, 'hello/wxcode.html', {'url': file_path})
+        # return HttpResponse('请使用微信或者支付宝扫码')
 
 
 # 二维码识别
 def scanQrCode(path):
-    with open(path, 'rb') as image_file:
-        image = Image.open(image_file)
-        image.load()
-    # wxp://f2f0JV5T664Amfb_JDHLXtMBTrL2_8PvU68O
-    # HTTPS://QR.ALIPAY.COM/FKX05639AEMUOSN0TE016F
-    codes = zbarlight.scan_codes('qrcode', image)
-    if codes != None:
-        code = str(codes[0]).lstrip("b'").rstrip("'")
-        print('二维码识别结果：' + code)
-        return code
-    else:
-        print('二维码识别失败')
-        return None
-    # return None
+    # with open(path, 'rb') as image_file:
+    #     image = Image.open(image_file)
+    #     image.load()
+    # # wxp://f2f0JV5T664Amfb_JDHLXtMBTrL2_8PvU68O
+    # # HTTPS://QR.ALIPAY.COM/FKX05639AEMUOSN0TE016F
+    # codes = zbarlight.scan_codes('qrcode', image)
+    # if codes != None:
+    #     code = str(codes[0]).lstrip("b'").rstrip("'")
+    #     print('二维码识别结果：' + code)
+    #     return code
+    # else:
+    #     print('二维码识别失败')
+    #     return None
+    return None

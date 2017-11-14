@@ -1,17 +1,80 @@
 
+body {
+     background-image: url("../../../media/img/bgimg.PNG");
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.input-section {
+    margin-top: 20%;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 90px;
+}
+
+.submit-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.input {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 20px;
+    color: white;
+}
+
+.input-label {
+    width: 60px;
+    text-align: center;
+    color: white;
+    /*padding: 1px;*/
+    margin-right: 10px;
+    /*background-color: cornflowerblue;*/
+    border:1px solid;
+    border-radius:2px;
+    /*margin-bottom: 5px;*/
+    font-size: smaller;
+}
+
+p {
+    font-size: larger;
+    text-align: center;
+    color: whitesmoke;
+}
+
+.container-header {
+    /*width: 100%;*/
+    margin-top: 10px;
+    margin-left: 30px;
+    color: white;
+    width: 100%;
+}
+
+button {
+    margin-top: 20px;
+    color: white;
+    border-color: white;
+    background-color: transparent;
+    width: 120px;
+    padding: 10px;
+    font-size: smaller;
+}
+
 .myUpload {
-    background-color: antiquewhite;
+    /*background-color: cornflowerblue;*/
     /*position: absolute;*/
-    display: block;
-    width: 100px;
-    height: 40px;
-    margin-bottom: 30px;
+    /*display: block;*/
+    /*width: 100px;*/
+    padding: 5px;
+
 }
-.myFileUpload {
-    /*position: absolute;*/
-    display: block;
-    width: 100px;
-    height: 40px;
-    opacity: 0;
-    background-color: #00b3ee;
-}
+

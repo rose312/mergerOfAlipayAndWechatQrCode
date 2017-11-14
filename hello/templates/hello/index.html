@@ -4,26 +4,35 @@
 <html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=gb2312" />
-    <title>一码付</title>
+    <title>收款码合成</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
 </head>
 <body>
-    <p>上传收款码</p>
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        <div>
-            <input type="file" name="ali-img">
-        </div>
-        <div>
-            <input type="file" name="wx-img">
-        </div>
-        <div>
-            <button type="submit">立即合并</button>
-        </div>
-    </form>
-    {% if url %}
-        <img src="{{ url }}" height="300" width="300">
-    {% endif %}
+    <div class="container">
+{#        <div >#}
+            <label class="container-header">收款码合成</label>
+{#        </div>#}
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="input-section">
+
+                    <div class="input">
+                        <label class="input-label">支付宝</label>
+                        <input type="file" name="ali-img" class="myUpload">
+                    </div>
+
+                    <div class="input">
+                        <label class="input-label">微信</label>
+                        <input type="file" name="wx-img" class="myUpload">
+                    </div>
+            </div>
+            <div class="submit-section">
+                <button type="submit">立即合成</button>
+            </div>
+
+
+        </form>
+    </div>
 
 </body>
 </html>
