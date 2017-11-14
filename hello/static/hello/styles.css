@@ -1,6 +1,6 @@
 
 body {
-     background-image: url("../../../media/img/bgimg.PNG");
+     background-image: url("../bgimg.PNG");
 }
 .container {
     display: flex;
