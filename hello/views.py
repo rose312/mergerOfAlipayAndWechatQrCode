@@ -6,7 +6,7 @@ import os
 
 from PIL import Image
 import qrcode
-# import zbarlight
+import zbarlight
 
 # Create your views here.
 def index(request):
@@ -33,8 +33,8 @@ def index(request):
             result = scanQrCode(file_path + nAli_img.img.name)
             if result != None:
                 if result.find('HTTPS://QR.ALIPAY.COM') != -1:
-                    print("是支付宝的收款码：" + result)
-                    contents['alipay'] = result
+                    print("是支付宝的收款码：" + result[22:])
+                    contents['alipay'] = result[22:]
                 else:
                     print('不是支付宝收款码')
                     contents['alipay'] = None
@@ -55,8 +55,8 @@ def index(request):
             result = scanQrCode(file_path + nWx_img.img.name)
             if result != None:
                 if result.find('wxp://') != -1:
-                    print("是微信的收款码：" + result)
-                    contents['wechat'] = result
+                    print("是微信的收款码：" + result[6:])
+                    contents['wechat'] = result[6:]
                 else:
                     print('不是微信收款码')
                     contents['wechat'] = None
@@ -83,13 +83,7 @@ def index(request):
         file_path = '/media/img/qrcode.png'
         return render(request, 'hello/index.html', {'url': file_path})
     else:
-        data = 'https://heyfox.herokuapp.com/pay?ali=' + 'FKX05639AEMUOSN0TE016F' + '&wx=' + 'f2f0JV5T664Amfb_JDHLXtMBTrL2_8PvU68O'
-        qr.add_data(data)
-        qr.make(fit=True)
-        img = qr.make_image()
-        img.save("media/img/qrcode.png")
-        file_path = '/media/img/qrcode.png'
-        return render(request, 'hello/index.html', {'url': file_path})
+        return render(request, 'hello/index.html', {'url': None})
 
 def pay(request):
     agent = request.META.get('HTTP_USER_AGENT', None)
@@ -128,17 +122,17 @@ def pay(request):
 
 # 二维码识别
 def scanQrCode(path):
-    # with open(path, 'rb') as image_file:
-    #     image = Image.open(image_file)
-    #     image.load()
-    # # wxp://f2f0JV5T664Amfb_JDHLXtMBTrL2_8PvU68O
-    # # HTTPS://QR.ALIPAY.COM/FKX05639AEMUOSN0TE016F
-    # codes = zbarlight.scan_codes('qrcode', image)
-    # if codes != None:
-    #     code = str(codes[0]).lstrip("b'").rstrip("'")
-    #     print('二维码识别结果：' + code)
-    #     return code
-    # else:
-    #     print('二维码识别失败')
-    #     return None
-    return None
+    with open(path, 'rb') as image_file:
+        image = Image.open(image_file)
+        image.load()
+    # wxp://f2f0JV5T664Amfb_JDHLXtMBTrL2_8PvU68O
+    # HTTPS://QR.ALIPAY.COM/FKX05639AEMUOSN0TE016F
+    codes = zbarlight.scan_codes('qrcode', image)
+    if codes != None:
+        code = str(codes[0]).lstrip("b'").rstrip("'")
+        print('二维码识别结果：' + code)
+        return code
+    else:
+        print('二维码识别失败')
+        return None
+    # return None

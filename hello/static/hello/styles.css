@@ -1,18 +1,17 @@
 
-/*body {*/
-    /*background-color: #888888;*/
-/*}*/
-
-/*input {*/
+.myUpload {
+    background-color: antiquewhite;
     /*position: absolute;*/
-    /*font-size: 100px;*/
-    /*right: 0;*/
-    /*top: 0;*/
-    /*opacity: 0;*/
-    /*filter: alpha(opacity=0);*/
-    /*cursor: pointer*/
-/*}*/
-
-div {
-
+    display: block;
+    width: 100px;
+    height: 40px;
+    margin-bottom: 30px;
+}
+.myFileUpload {
+    /*position: absolute;*/
+    display: block;
+    width: 100px;
+    height: 40px;
+    opacity: 0;
+    background-color: #00b3ee;
 }
