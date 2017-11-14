@@ -1,44 +1,13 @@
-# python-getting-started
+### 支付宝、微信转账二维码合成器
 
-A barebones Python app, which can easily be deployed to Heroku.
+1. 上传个人的支付宝收款二维码和微信收款二维码，点击合成；
 
-This application supports the [Getting Started with Python on Heroku](https://devcenter.heroku.com/articles/getting-started-with-python) article - check it out.
+2. 客户使用支付宝或者微信扫描合成的二维码即可完成转账；
 
-## Running Locally
+   注：
 
-Make sure you have Python [installed properly](http://install.python-guide.org).  Also, install the [Heroku Toolbelt](https://toolbelt.heroku.com/) and [Postgres](https://devcenter.heroku.com/articles/heroku-postgresql#local-setup).
+   客户如果使用支付宝扫码，则自动跳转至输入金额界面；
 
-```sh
-$ git clone git@github.com:heroku/python-getting-started.git
-$ cd python-getting-started
+   客户如果使用微信扫码，则需要在扫码后出现的界面里长按识别二维码，以跳转到输入金额界面。
 
-$ pip install -r requirements.txt
-
-$ createdb python_getting_started
-
-$ python manage.py migrate
-$ python manage.py collectstatic
-
-$ heroku local
-```
-
-Your app should now be running on [localhost:5000](http://localhost:5000/).
-
-## Deploying to Heroku
-
-```sh
-$ heroku create
-$ git push heroku master
-
-$ heroku run python manage.py migrate
-$ heroku open
-```
-or
-
-[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
-
-## Documentation
-
-For more information about using Python on Heroku, see these Dev Center articles:
-
-- [Python on Heroku](https://devcenter.heroku.com/categories/python)
+![](http://7xoz39.com1.z0.glb.clouddn.com/alipay-wechat.png)
