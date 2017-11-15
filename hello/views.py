@@ -229,3 +229,5 @@ def scanQrCode(path):
 
 
 # zbarlight==1.2
+# zbarlight==1.2
+# zbar==0.10
