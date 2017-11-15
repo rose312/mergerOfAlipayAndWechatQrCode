@@ -28,5 +28,5 @@ tesseract==0.1.3
 utils==0.9.0
 whitenoise==2.0.6
 zbar==0.10
-zbarlight==1.2
+
 zope.interface==4.1.1
