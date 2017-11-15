@@ -10,4 +10,4 @@
 
    客户如果使用微信扫码，则需要在扫码后出现的界面里长按识别二维码，以跳转到输入金额界面。
 
-![](http://7xoz39.com1.z0.glb.clouddn.com/alipay-wechat.png)
+![](http://7xoz39.com1.z0.glb.clouddn.com/alipay_wechat.png)
