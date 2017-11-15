@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="359a28de-035f-488a-8167-0c41dbaa023e" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Aptfile" afterPath="$PROJECT_DIR$/Aptfile" />
-    </list>
+    <list default="true" id="359a28de-035f-488a-8167-0c41dbaa023e" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -174,7 +172,7 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="35" />
+    <option name="x" value="175" />
     <option name="y" value="23" />
     <option name="width" value="1231" />
     <option name="height" value="754" />
@@ -555,7 +553,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="35" y="23" width="1231" height="754" extended-state="0" />
+    <frame x="175" y="23" width="1231" height="754" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2843217" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
