@@ -7,11 +7,14 @@ import os
 from PIL import Image
 import qrcode
 # import zbarlight
+from pyzbar.pyzbar import decode
 
 
 # Create your views here.
 def index(request):
     contents = {}
+
+
 
     if request.method == 'POST':
         ali = request.FILES.get('ali-img', None)
@@ -196,7 +199,23 @@ def scanQrCode(path):
     # else:
     #     print('二维码识别失败')
     #     return None
-    return None
+
+    try:
+        dec = decode(Image.open(path))
+        print(dec)
+        if dec != None:
+            code = dec[0]
+            print(code.data)
+            if code.type == 'QRCODE':
+                data = code.data
+                print('解码数据：', str(data).lstrip("b'").rstrip("'"))
+                return str(data).lstrip("b'").rstrip("'")
+        return None
+    except:
+        print("二维码错误")
+        return None
+
+
 
 
 # zbarlight==1.2

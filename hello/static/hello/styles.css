@@ -1,5 +1,6 @@
 
 body {
+    background-color: black;
      background-image: url("../bgimg.jpg");
 }
 .container {
@@ -9,18 +10,18 @@ body {
     justify-content: center;
     box-sizing:border-box;
     min-height:100%;
-    padding-bottom:30px;
+    padding-bottom:20px;
 }
 
 .footer {
-    margin-top: -30px; /* footer高度的负值 */
-    height: 30px;
+    margin-top: -20px; /* footer高度的负值 */
+    height: 20px;
     float: right;
 }
 
 .logo-img {
     width: 60px;
-    height: 30px;
+    height: 20px;
 }
 
 .input-section {
