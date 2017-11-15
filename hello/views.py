@@ -7,17 +7,12 @@ import os
 
 from PIL import Image
 import qrcode
-# import zbar
-# from qrtools import QR
-import zbarlight
-# from pyzbar.pyzbar import decode
+# import zbarlight
 
 
 # Create your views here.
 def index(request):
     contents = {}
-
-
 
     if request.method == 'POST':
         ali = request.FILES.get('ali-img', None)
@@ -189,42 +184,20 @@ def addLogo(img, logo):
 
 # 二维码识别
 def scanQrCode(path):
-    # qr = QR()
-    # qr.decode(path)
-    # print('解码数据：', qr.data)
-    #
-    # return None
-
-    with open(path, 'rb') as image_file:
-        image = Image.open(image_file)
-        image.load()
-    # wxp://f2f0JV5T664Amfb_JDHLXtMBTrL2_8PvU68O
-    # HTTPS://QR.ALIPAY.COM/FKX05639AEMUOSN0TE016F
-    codes = zbarlight.scan_codes('qrcode', image)
-    if codes != None:
-        code = str(codes[0]).lstrip("b'").rstrip("'")
-        print('二维码识别结果：' + code)
-        return code
-    else:
-        print('二维码识别失败')
-        return None
-
-
-    # try:
-    #     dec = decode(Image.open(path))
-    #     print(dec)
-    #     if dec != None:
-    #         code = dec[0]
-    #         print(code.data)
-    #         if code.type == 'QRCODE':
-    #             data = code.data
-    #             print('解码数据：', str(data).lstrip("b'").rstrip("'"))
-    #             return str(data).lstrip("b'").rstrip("'")
+    return None
+    # with open(path, 'rb') as image_file:
+    #     image = Image.open(image_file)
+    #     image.load()
+    # # wxp://f2f0JV5T664Amfb_JDHLXtMBTrL2_8PvU68O
+    # # HTTPS://QR.ALIPAY.COM/FKX05639AEMUOSN0TE016F
+    # codes = zbarlight.scan_codes('qrcode', image)
+    # if codes != None:
+    #     code = str(codes[0]).lstrip("b'").rstrip("'")
+    #     print('二维码识别结果：' + code)
+    #     return code
+    # else:
+    #     print('二维码识别失败')
     #     return None
-    # except:
-    #     print("二维码错误")
-    #     return None
-
 
 
 
