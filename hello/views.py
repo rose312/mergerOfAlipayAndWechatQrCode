@@ -6,7 +6,7 @@ import os
 
 from PIL import Image
 import qrcode
-import zbarlight
+# import zbarlight
 
 
 # Create your views here.
@@ -95,8 +95,23 @@ def index(request):
         qr.add_data(data)
         qr.make(fit=True)
         img = qr.make_image()
+
+        # LOGO
+        logo = request.FILES.get('logo', None)
+        if logo != None:
+            logo_img = Img(
+                img=logo,
+                name="logo"
+            )
+            logo_img.save()
+            file_path = os.path.dirname(os.path.dirname(__file__)) + '/media/' + logo_img.img.name
+            img = addLogo(img, file_path)
+            os.remove(file_path)
+
+
         img.save("media/img/qrcode.png")
         file_path = '/media/img/qrcode.png'
+
         return render(request, 'hello/wxcode.html', {'url': file_path,
                                                      'info': "支持微信和支付宝收款"})
     else:
@@ -140,22 +155,48 @@ def pay(request):
                                                      'info': "请使用微信、支付宝进行扫码支付"})
 
 
+# 添加logo
+def addLogo(img, logo):
+    try:
+        img = img.convert("RGBA")
+        icon = Image.open(logo)
+        img_w, img_h = img.size
+        factor = 6
+        size_w = int(img_w / factor)
+        size_h = int(img_h / factor)
+
+        icon_w, icon_h = icon.size
+        if icon_w > size_w:
+            icon_w = size_w
+        if icon_h > size_h:
+            icon_h = size_h
+        icon = icon.resize((icon_w, icon_h), Image.ANTIALIAS)
+
+        w = int((img_w - icon_w) / 2)
+        h = int((img_h - icon_h) / 2)
+        img.paste(icon, (w, h), icon)
+        return img
+    except:
+        print('logo添加错误')
+        return img
+
+
 # 二维码识别
 def scanQrCode(path):
-    with open(path, 'rb') as image_file:
-        image = Image.open(image_file)
-        image.load()
-    # wxp://f2f0JV5T664Amfb_JDHLXtMBTrL2_8PvU68O
-    # HTTPS://QR.ALIPAY.COM/FKX05639AEMUOSN0TE016F
-    codes = zbarlight.scan_codes('qrcode', image)
-    if codes != None:
-        code = str(codes[0]).lstrip("b'").rstrip("'")
-        print('二维码识别结果：' + code)
-        return code
-    else:
-        print('二维码识别失败')
-        return None
-    # return None
+    # with open(path, 'rb') as image_file:
+    #     image = Image.open(image_file)
+    #     image.load()
+    # # wxp://f2f0JV5T664Amfb_JDHLXtMBTrL2_8PvU68O
+    # # HTTPS://QR.ALIPAY.COM/FKX05639AEMUOSN0TE016F
+    # codes = zbarlight.scan_codes('qrcode', image)
+    # if codes != None:
+    #     code = str(codes[0]).lstrip("b'").rstrip("'")
+    #     print('二维码识别结果：' + code)
+    #     return code
+    # else:
+    #     print('二维码识别失败')
+    #     return None
+    return None
 
 
 # zbarlight==1.2

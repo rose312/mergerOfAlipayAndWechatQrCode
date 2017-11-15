@@ -54,4 +54,4 @@ virtualenv-clone==0.2.6
 whitenoise==2.0.6
 xlwt==1.2.0
 yarl==0.9.8
-zbarlight==1.2
+
