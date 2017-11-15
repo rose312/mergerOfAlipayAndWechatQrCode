@@ -2,7 +2,7 @@ altgraph==0.10.2
 antiorm==1.2.1
 bdist-mpkg==0.5.0
 beautifulsoup4==4.5.3
-bonjour-py==0.3
+
 bs4==0.0.1
 chardet==2.3.0
 click==6.7
