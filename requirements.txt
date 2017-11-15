@@ -20,6 +20,7 @@ itsdangerous==0.24
 
 
 qrcode==5.3
+Pillow==4.0.0
 
 static3==0.7.0
 tesseract==0.1.3
